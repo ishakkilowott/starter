@@ -7,7 +7,7 @@ const form = document.querySelector(".form--login");
 const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
-// const bookBtn = document.getElementById('book-tour');
+const bookBtn = document.getElementById('book-tour');
 
 
 if (form) {
@@ -30,18 +30,9 @@ if(userDataForm) {
     formData.append('email', document.getElementById("email").value);
     
     const photoFile = document.getElementById("photo").files[0];
-    console.log('Selected file:', photoFile); // This should now show the file
     
     if (photoFile) {
       formData.append('photo', photoFile);
-      console.log('File name:', photoFile.name);
-      console.log('File size:', photoFile.size);
-      console.log('File type:', photoFile.type);
-    }
-
-    // Log all formData entries for debugging
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}:`, value);
     }
 
     updateSettings(formData, 'data');
@@ -65,27 +56,17 @@ if(userPasswordForm) {
    })
 }        
 
-// if(bookBtn)
-//   bookBtn.addEventListener('click', e =>{
-//     console.log("tour book is clicked")
-//     e.target.textContent= 'Processing...';
-//     const { tourId } = e.target.dataset;
-//     bookTour(tourId);
-// });
-
-document.addEventListener('DOMContentLoaded', () => {
-  const bookBtn = document.getElementById('book-tour');
-  console.log('Book button:', bookBtn); // Debug: Check if button is found
-  if (bookBtn) {
-    console.log('Button dataset:', bookBtn.dataset); // Debug: Check dataset
-    bookBtn.addEventListener('click', e => {
-      console.log('Tour book is clicked'); // Debug: Confirm click
-      e.target.textContent = 'Processing...';
-      const { tourId } = e.target.dataset;
-      console.log('Tour ID:', tourId); // Debug: Confirm tourId
-      bookTour(tourId);
-    });
-  } else {
-    console.error('Error: Book button not found in DOM');
-  }
+if(bookBtn)
+  bookBtn.addEventListener('click', e => {
+    e.preventDefault();
+    const button = e.currentTarget; // ensures you get the button itself
+    console.log("tour book is clicked");
+    button.textContent = 'Processing...';
+    const { tourId } = button.dataset;
+    if (!tourId) {
+      console.error("tourId is undefined!");
+      return;
+    }
+    bookTour(tourId);
 });
+

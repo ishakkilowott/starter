@@ -22,7 +22,18 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set security HTTP headers
-app.use(helmet());
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       scriptSrc: ["'self'", "https://js.stripe.com"],
+//       connectSrc: ["'self'", "https://api.stripe.com"],
+//       styleSrc: ["'self'", "'unsafe-inline'"],
+//       imgSrc: ["'self'", "data:"],
+//       frameSrc: ["https://js.stripe.com"]
+//     },
+//   })
+// );
 
 // add rate limiter to prevent DOS and brute force attack, basically limiting number of request for perticular time.
 const limiter = rateLimit({
@@ -43,7 +54,7 @@ app.use((req, res, next) => {
 })
 
 // used to compress the text response sent to client
-app.use(compression);
+app.use(compression());
 
 // Routes
 app.use("/", viewRouter);
