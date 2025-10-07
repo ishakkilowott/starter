@@ -1,5 +1,3 @@
-console.log("Hellow from client side");
-
 const locations = JSON.parse(document.getElementById('map').dataset.locations);
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiaXNoYWtraWxvd290dCIsImEiOiJjbWc3dmY3NjUwMG9sMmtzOGlkdHl6ZDR3In0.NkCIFDQ2fo32TfapI9dGow';

@@ -10,6 +10,7 @@ const globalErrorHandler = require('./Controllers/errorController');
 const rateLimit =  require('express-rate-limit');
 const helmet = require('helmet');
 const cookieParser =  require('cookie-parser');
+const compression = require('compression');
 
 
 const app = express();
@@ -40,6 +41,9 @@ app.use((req, res, next) => {
   req.reqestTime = new Date().toISOString();
   next();
 })
+
+// used to compress the text response sent to client
+app.use(compression);
 
 // Routes
 app.use("/", viewRouter);

@@ -2,7 +2,7 @@ import { showAlert } from "./alerts";
 
 export const login = async (email, password) => {
   try {
-    const res = await fetch("http://localhost:3000/api/v1/users/login", {
+    const res = await fetch("/api/v1/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password })
@@ -13,8 +13,6 @@ export const login = async (email, password) => {
     if (!res.ok) {
       return showAlert('error',data.message);  // 401, 400, etc.
     }
-
-    console.log(data);
 
     if (data.status === 'success') {
       showAlert('success','Logged in successfully!');
@@ -31,7 +29,7 @@ export const login = async (email, password) => {
 
 export const logout = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/v1/users/logout", {
+    const res = await fetch("/api/v1/users/logout", {
       method: "GET",
     });
 
